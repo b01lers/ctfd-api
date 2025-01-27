@@ -3,7 +3,7 @@ export type ScoreboardResponse = {
     data: ScoreboardData[],
 }
 
-type ScoreboardData = {
+export type ScoreboardData = {
     pos: number,
     account_id: number,
     account_url: string,
@@ -20,7 +20,7 @@ export type ChallengesResponse = {
     data: ChallengeData[]
 }
 
-type ChallengeData = {
+export type ChallengeData = {
     id: number,
     type: 'standard' | 'multiple_choice' | 'code',
     name: string,
