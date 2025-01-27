@@ -58,5 +58,8 @@ export type FlagSubmissionResponse = {
     } | {
         status: 'correct',
         message: 'Correct'
+    } | {
+        status: 'already_solved',
+        message: 'You already solved this'
     }
 }
