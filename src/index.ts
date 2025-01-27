@@ -1,2 +1,2 @@
 export { CTFdClient } from './client';
-export type { ScoreboardData, ChallengeData } from './types';
+export type { ScoreboardEntry, ChallengeData } from './types';

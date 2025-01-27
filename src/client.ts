@@ -1,5 +1,5 @@
 import { extractNonce } from './util';
-import type { ChallengesResponse, FlagSubmissionResponse } from './types';
+import type { ChallengesResponse, FlagSubmissionResponse, ScoreboardResponse } from './types';
 
 
 type ClientOptions = {
@@ -49,6 +49,19 @@ export class CTFdClient {
         return res.data;
     }
 
+    public async getScoreboard() {
+        const { session, nonce } = await this.getAuthedSessionNonce();
+
+        const res = await (await fetch(`${this.url}/api/v1/scoreboard`, {
+            headers: {
+                'Csrf-Token': nonce,
+                cookie: session,
+            },
+        })).json() as ScoreboardResponse;
+
+        return res.data;
+    }
+
     private async getAuthedSessionNonce() {
         // If we have a cached, non-expired session, use it
         if (new Date() < this.sessionExpiry && this.cachedSession && this.cachedNonce)
@@ -88,9 +101,3 @@ export class CTFdClient {
         };
     }
 }
-
-// export async function getScoreboard() {
-//     return await (await fetch('https://ectf.ctfd.io/api/v1/scoreboard', {
-//         headers: { 'Authorization': CTFD_API_KEY }
-//     })).json() as ScoreboardResponse;
-// }

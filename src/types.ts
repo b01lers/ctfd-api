@@ -1,19 +1,36 @@
 export type ScoreboardResponse = {
     success: true,
-    data: ScoreboardData[],
+    data: ScoreboardEntry[],
 }
 
-export type ScoreboardData = {
+type BaseScoreboardEntry = {
     pos: number,
     account_id: number,
     account_url: string,
-    account_type: "user",
     oauth_id: null,
     name: string,
     score: number,
     bracket_id: null,
     bracket_name: null
 }
+
+type ScoreboardUserEntry = BaseScoreboardEntry & {
+    account_type: "user",
+}
+
+type ScoreboardTeamEntry = BaseScoreboardEntry & {
+    account_type: "team",
+    members: {
+        id: number,
+        oauth_id: null,
+        name: string,
+        score: number,
+        bracket_id: null,
+        bracket_name: null
+    }[]
+}
+
+export type ScoreboardEntry = ScoreboardUserEntry | ScoreboardTeamEntry;
 
 export type ChallengesResponse = {
     success: true,

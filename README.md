@@ -21,6 +21,10 @@ const client = new CTFdClient({
 // Fetch challenges list
 const challs = await client.getChallenges();
 
+// Fetch scoreboard data
+const scoreboard = await client.getScoreboard();
+console.log(scoreboard.slice(0, 5));
+
 // Submit a flag for a challenge
 const chall = challs.find((c) => c.name === 'The Lost Park')!;
 await client.submitFlag(chall.id, 'cftd{test_flag}');

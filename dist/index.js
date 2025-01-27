@@ -39,6 +39,16 @@ class CTFdClient {
     })).json();
     return res.data;
   }
+  async getScoreboard() {
+    const { session, nonce } = await this.getAuthedSessionNonce();
+    const res = await (await fetch(`${this.url}/api/v1/scoreboard`, {
+      headers: {
+        "Csrf-Token": nonce,
+        cookie: session
+      }
+    })).json();
+    return res.data;
+  }
   async getAuthedSessionNonce() {
     if (/* @__PURE__ */ new Date() < this.sessionExpiry && this.cachedSession && this.cachedNonce)
       return { session: this.cachedSession, nonce: this.cachedNonce };
