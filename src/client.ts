@@ -1,5 +1,10 @@
 import { extractNonce } from './util';
-import type { ChallengesResponse, FlagSubmissionResponse, ScoreboardResponse } from './types';
+import type {
+    ChallengeDetailsResponse,
+    ChallengesResponse,
+    FlagSubmissionResponse,
+    ScoreboardResponse
+} from './types';
 
 
 type ClientOptions = {
@@ -45,6 +50,16 @@ export class CTFdClient {
         const res = await (await fetch(`${this.url}/api/v1/challenges`, {
             headers: { cookie: session }
         })).json() as ChallengesResponse;
+
+        return res.data;
+    }
+
+    public async getChallengeDetails(id: number) {
+        const { session } = await this.getAuthedSessionNonce();
+
+        const res = await (await fetch(`${this.url}/api/v1/challenges/${id}`, {
+            headers: { cookie: session }
+        })).json() as ChallengeDetailsResponse;
 
         return res.data;
     }
