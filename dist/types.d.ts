@@ -52,6 +52,9 @@ declare class CTFdClient {
     submitFlag(id: number, flag: string): Promise<{
         status: "incorrect";
         message: "Incorrect";
+    } | {
+        status: "correct";
+        message: "Correct";
     }>;
     getChallenges(): Promise<ChallengeData[]>;
     getScoreboard(): Promise<ScoreboardEntry[]>;

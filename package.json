@@ -4,6 +4,7 @@
   "description": "An API client for CTFd.",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
+  "repository": "https://github.com/b01lers/ctfd-api.git",
   "scripts": {
     "build": "rollup --config"
   },

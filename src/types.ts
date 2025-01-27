@@ -53,7 +53,10 @@ export type ChallengeData = {
 export type FlagSubmissionResponse = {
     success: true,
     data: {
-        status: "incorrect", // TODO
-        message: "Incorrect"
+        status: 'incorrect',
+        message: 'Incorrect'
+    } | {
+        status: 'correct',
+        message: 'Correct'
     }
 }

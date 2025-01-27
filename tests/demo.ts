@@ -15,6 +15,6 @@ import { CTFdClient } from '../src/client';
     console.log(scoreboard.slice(0, 5));
 
     const chall = challs.find((c) => c.name === 'The Lost Park')!;
-    const res = await client.submitFlag(chall.id, 'cftd{test_flag}');
+    const res = await client.submitFlag(chall.id, 'Major Mark Park');
     console.log(res);
 })()
