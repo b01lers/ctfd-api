@@ -1,0 +1,15 @@
+{
+  "name": "@b01lers/ctfd-api",
+  "version": "1.0.0",
+  "description": "An API client for CTFd.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ky28059",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "typescript": "^5.7.3"
+  }
+}
