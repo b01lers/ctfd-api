@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An API client for CTFd.",
   "main": "dist/index.js",
+  "types": "dist/types.d.ts",
   "scripts": {
     "build": "rollup --config"
   },
@@ -11,6 +12,7 @@
   "devDependencies": {
     "@types/node": "^22.10.10",
     "rollup": "^4.32.0",
+    "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-esbuild": "^6.1.1",
     "tslib": "^2.8.1",
     "typescript": "^5.7.3"

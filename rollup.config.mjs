@@ -1,7 +1,8 @@
 import esbuild from 'rollup-plugin-esbuild';
+import { dts } from 'rollup-plugin-dts';
 
 
-export default {
+export default [{
     input: 'src/index.ts',
     output: {
         file: 'dist/index.js',
@@ -10,4 +11,10 @@ export default {
     plugins: [
         esbuild(),
     ]
-};
+}, {
+    input: "./src/index.ts",
+    output: [{ file: "dist/types.d.ts", format: "es" }],
+    plugins: [
+        dts()
+    ],
+}];
