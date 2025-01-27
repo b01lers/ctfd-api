@@ -9,10 +9,6 @@ type ScoreboardData = {
     bracket_id: null;
     bracket_name: null;
 };
-type ChallengesResponse = {
-    success: true;
-    data: ChallengeData[];
-};
 type ChallengeData = {
     id: number;
     type: 'standard' | 'multiple_choice' | 'code';
@@ -24,13 +20,6 @@ type ChallengeData = {
     tags: string[];
     template: string;
     value: number;
-};
-type FlagSubmissionResponse = {
-    success: true;
-    data: {
-        status: "incorrect";
-        message: "Incorrect";
-    };
 };
 
 type ClientOptions = {
@@ -46,8 +35,11 @@ declare class CTFdClient {
     private cachedNonce;
     private sessionExpiry;
     constructor(options: ClientOptions);
-    submitFlag(id: number, flag: string): Promise<FlagSubmissionResponse>;
-    getChallenges(): Promise<ChallengesResponse>;
+    submitFlag(id: number, flag: string): Promise<{
+        status: "incorrect";
+        message: "Incorrect";
+    }>;
+    getChallenges(): Promise<ChallengeData[]>;
     private getAuthedSessionNonce;
 }
 

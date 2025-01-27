@@ -21,7 +21,7 @@ class CTFdClient {
   }
   async submitFlag(id, flag) {
     const { session, nonce } = await this.getAuthedSessionNonce();
-    return await (await fetch(`${this.url}/api/v1/challenges/attempt`, {
+    const res = await (await fetch(`${this.url}/api/v1/challenges/attempt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,12 +30,14 @@ class CTFdClient {
       },
       body: JSON.stringify({ challenge_id: id, submission: flag })
     })).json();
+    return res.data;
   }
   async getChallenges() {
     const { session } = await this.getAuthedSessionNonce();
-    return await (await fetch(`${this.url}/api/v1/challenges`, {
+    const res = await (await fetch(`${this.url}/api/v1/challenges`, {
       headers: { cookie: session }
     })).json();
+    return res.data;
   }
   async getAuthedSessionNonce() {
     if (/* @__PURE__ */ new Date() < this.sessionExpiry && this.cachedSession && this.cachedNonce)
