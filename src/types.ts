@@ -12,8 +12,8 @@ type BaseScoreboardEntry = {
     oauth_id: null,
     name: string,
     score: number,
-    bracket_id: null,
-    bracket_name: null
+    bracket_id: number | null,
+    bracket_name: string | null  // e.g. "Open Bracket"
 }
 
 type ScoreboardUserEntry = BaseScoreboardEntry & {
@@ -100,4 +100,10 @@ export type FlagSubmissionResponse = APISuccess<{
 } | {
     status: 'already_solved',
     message: 'You already solved this'
+} | {
+    status: 'paused',
+    message: `${string} is paused`
+} | {
+    status: 'ratelimited',
+    message: 'You\'re submitting flags too fast. Slow down.'
 }>

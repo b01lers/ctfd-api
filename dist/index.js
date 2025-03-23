@@ -39,6 +39,13 @@ class CTFdClient {
     })).json();
     return res.data;
   }
+  async getChallengeDetails(id) {
+    const { session } = await this.getAuthedSessionNonce();
+    const res = await (await fetch(`${this.url}/api/v1/challenges/${id}`, {
+      headers: { cookie: session }
+    })).json();
+    return res.data;
+  }
   async getScoreboard() {
     const { session, nonce } = await this.getAuthedSessionNonce();
     const res = await (await fetch(`${this.url}/api/v1/scoreboard`, {

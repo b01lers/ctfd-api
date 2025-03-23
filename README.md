@@ -48,10 +48,10 @@ const challs = await client.getChallenges();
 const scoreboard = await client.getScoreboard();
 console.log(scoreboard.slice(0, 5));
 
-// Get details about a challenge, and submits a flag
+// Get details about a challenge, and submit a flag
 const chall = challs.find((c) => c.name === 'The Lost Park')!;
 const details = await client.getChallengeDetails(chall.id);
 console.log(details.description);
 
-await client.submitFlag(chall.id, 'cftd{test_flag}');
+await client.submitFlag(chall.id, 'ctfd{test_flag}');
 ```
