@@ -62,7 +62,7 @@ class CTFdClient {
     const res = await fetch(`${this.url}/login`);
     const [session] = res.headers.getSetCookie()[0].split("; ");
     const nonce = extractNonce(await res.text());
-    const formData = new FormData();
+    const formData = new URLSearchParams();
     formData.append("name", this.username);
     formData.append("password", this.password);
     formData.append("_submit", "Submit");
