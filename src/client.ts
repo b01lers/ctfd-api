@@ -1,7 +1,6 @@
 import { createChallenges } from './endpoints/challenges';
+import { createScoreboard } from './endpoints/scoreboard';
 import { extractNonce } from './util';
-import type { APISuccess } from './types/api';
-import type { ScoreboardEntry } from './types/scoreboard';
 
 
 type ClientOptions = {
@@ -9,9 +8,6 @@ type ClientOptions = {
     username: string,
     password: string,
 }
-
-// TODO
-type ScoreboardResponse = APISuccess<ScoreboardEntry[]>;
 
 export class CTFdClient {
     public readonly url: string;
@@ -23,6 +19,7 @@ export class CTFdClient {
     private sessionExpiry = new Date();
 
     public readonly challenges: ReturnType<typeof createChallenges>;
+    public readonly scoreboard: ReturnType<typeof createScoreboard>;
 
     constructor(options: ClientOptions) {
         this.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
@@ -30,19 +27,7 @@ export class CTFdClient {
         this.password = options.password;
 
         this.challenges = createChallenges(this);
-    }
-
-    public async getScoreboard() {
-        const { session, nonce } = await this.getAuthedSessionNonce();
-
-        const res = await (await fetch(`${this.url}/api/v1/scoreboard`, {
-            headers: {
-                'Csrf-Token': nonce,
-                cookie: session,
-            },
-        })).json() as ScoreboardResponse;
-
-        return res.data;
+        this.scoreboard = createScoreboard(this);
     }
 
     // TODO: somehow make non-public?

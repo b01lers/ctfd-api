@@ -8,12 +8,12 @@ import { CTFdClient } from '../src/client';
         password: 'password',
     });
 
-    const chall = (await client.getChallenges()).find((c) => c.name === 'Too Many Puppers')!;
+    const chall = (await client.challenges.getChallenges()).find((c) => c.name === 'The Lost Park')!;
 
-    const res = await client.submitFlag(chall.id, 'test');
+    const res = await client.challenges.submitFlag(chall.id, 'test');
     console.log(res);
 
     for (let i = 0; i < 20; i++) {
-        console.log(await client.submitFlag(chall.id, 'test'));
+        console.log(await client.challenges.submitFlag(chall.id, 'test'));
     }
 })()
