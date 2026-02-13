@@ -1,6 +1,7 @@
 import { createChallenges } from './endpoints/challenges';
 import { extractNonce } from './util';
-import type { ScoreboardResponse } from './types';
+import type { APISuccess } from './types/api';
+import type { ScoreboardEntry } from './types/scoreboard';
 
 
 type ClientOptions = {
@@ -8,6 +9,9 @@ type ClientOptions = {
     username: string,
     password: string,
 }
+
+// TODO
+type ScoreboardResponse = APISuccess<ScoreboardEntry[]>;
 
 export class CTFdClient {
     public readonly url: string;

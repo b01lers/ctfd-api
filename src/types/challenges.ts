@@ -1,43 +1,12 @@
-type APISuccess<T> = {
-    success: true,
-    data: T
-}
-
-export type ScoreboardResponse = APISuccess<ScoreboardEntry[]>
-
-type BaseScoreboardEntry = {
-    pos: number,
+export interface Solve {
     account_id: number,
     account_url: string,
-    oauth_id: null,
+    date: string,
     name: string,
-    score: number,
-    bracket_id: number | null,
-    bracket_name: string | null  // e.g. "Open Bracket"
 }
-
-type ScoreboardUserEntry = BaseScoreboardEntry & {
-    account_type: "user",
-}
-
-type ScoreboardTeamEntry = BaseScoreboardEntry & {
-    account_type: "team",
-    members: {
-        id: number,
-        oauth_id: null,
-        name: string,
-        score: number,
-        bracket_id: null,
-        bracket_name: null
-    }[]
-}
-
-export type ScoreboardEntry = ScoreboardUserEntry | ScoreboardTeamEntry;
-
-export type ChallengesResponse = APISuccess<ChallengeData[]>
 
 export type ChallengeType = 'standard' | 'multiple_choice' | 'code';
-export type ChallengeData = {
+export interface Challenge {
     id: number,
     type: ChallengeType,
     name: string,
@@ -49,8 +18,6 @@ export type ChallengeData = {
     template: string,
     value: number,
 }
-
-export type ChallengeDetailsResponse = APISuccess<ChallengeDetails>;
 
 type BaseChallengeDetails = {
     id: number,
@@ -90,20 +57,3 @@ type ProgrammingChallengeDetails = BaseChallengeDetails & {
 }
 
 export type ChallengeDetails = StandardChallengeDetails | ProgrammingChallengeDetails;
-
-export type FlagSubmissionResponse = APISuccess<{
-    status: 'incorrect',
-    message: 'Incorrect'
-} | {
-    status: 'correct',
-    message: 'Correct'
-} | {
-    status: 'already_solved',
-    message: 'You already solved this'
-} | {
-    status: 'paused',
-    message: `${string} is paused`
-} | {
-    status: 'ratelimited',
-    message: 'You\'re submitting flags too fast. Slow down.'
-}>
