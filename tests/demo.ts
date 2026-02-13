@@ -8,16 +8,16 @@ import { CTFdClient } from '../src/client';
         password: 'password',
     });
 
-    const challs = await client.getChallenges();
+    const challs = await client.challenges.getChallenges();
     console.log(challs);
 
     const scoreboard = await client.getScoreboard();
     console.log(scoreboard.slice(0, 5));
 
     const chall = challs.find((c) => c.name === 'The Lost Park')!;
-    const details = await client.getChallengeDetails(chall.id);
+    const details = await client.challenges.getDetails(chall.id);
     console.log(details);
 
-    const res = await client.submitFlag(chall.id, 'Major Mark Park');
+    const res = await client.challenges.submitFlag(chall.id, 'Major Mark Park');
     console.log(res);
 })()
