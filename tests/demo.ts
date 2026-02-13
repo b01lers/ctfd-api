@@ -20,4 +20,7 @@ import { CTFdClient } from '../src/client';
 
     const res = await client.challenges.submitFlag(chall.id, 'Major Mark Park');
     console.log(res);
+
+    const solves = await client.challenges.getSolves(chall.id);
+    console.log(solves);
 })()

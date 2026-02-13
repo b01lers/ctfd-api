@@ -1,11 +1,13 @@
 import type { CTFdClient } from '../client';
-import type { Challenge, ChallengeDetails } from '../types/challenges';
+import type { Challenge, ChallengeDetails, Solve } from '../types/challenges';
 import type { APISuccess } from '../types/api';
 
 
 // TODO: abstract APISuccess
 export type ChallengesResponse = APISuccess<Challenge[]>;
 export type ChallengeDetailsResponse = APISuccess<ChallengeDetails>;
+export type ChallengeSolvesResponse = APISuccess<Solve[]>;
+
 export type FlagSubmissionResponse = APISuccess<{
     status: 'incorrect',
     message: 'Incorrect'
@@ -88,7 +90,7 @@ export function createChallenges(client: CTFdClient) {
 
             const res = await (await fetch(`${client.url}/api/v1/challenges/${id}/solves`, {
                 headers: { cookie: session }
-            })).json() as ChallengeDetailsResponse;
+            })).json() as ChallengeSolvesResponse;
 
             return res.data;
         }
