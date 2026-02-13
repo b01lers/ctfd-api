@@ -1,6 +1,7 @@
 import { createChallenges } from './endpoints/challenges';
 import { createScoreboard } from './endpoints/scoreboard';
 import { extractNonce } from './util';
+import type { APISuccess } from './types/api';
 
 
 type ClientOptions = {
@@ -30,7 +31,21 @@ export class CTFdClient {
         this.scoreboard = createScoreboard(this);
     }
 
-    // TODO: somehow make non-public?
+    public async callApi<T>(endpoint: string) {
+        const { session, nonce } = await this.getAuthedSessionNonce();
+
+        // TODO: error handling?
+        const res = await (await fetch(`${this.url}/api/v1${endpoint}`, {
+            headers: {
+                'Csrf-Token': nonce,
+                cookie: session,
+            },
+        })).json() as APISuccess<T>;
+
+        return res.data;
+    }
+
+    // TODO
     public async getAuthedSessionNonce() {
         // If we have a cached, non-expired session, use it
         if (new Date() < this.sessionExpiry && this.cachedSession && this.cachedNonce)
