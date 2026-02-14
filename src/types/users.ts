@@ -1,0 +1,22 @@
+export interface User {
+    id: number,
+    oauth_id: number | null,
+    name: string,
+    // password: string,
+    email: string,
+    // type: string,
+    // secret: string,
+    website: string | null,
+    affiliation: string | null,
+    country: string | null,
+    bracket_id: number | null,
+    // hidden: boolean,
+    // banned: boolean,
+    // verified: boolean,
+    language: string | null,
+    // change_password: boolean,
+    team_id: number,
+    created: string, // ISO
+
+    fields: [], // TODO
+}

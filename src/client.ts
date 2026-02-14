@@ -1,5 +1,6 @@
 import { createChallenges } from './endpoints/challenges';
 import { createScoreboard } from './endpoints/scoreboard';
+import { createUsers } from './endpoints/users';
 import { extractNonce } from './util';
 import type { APISuccess } from './types/api';
 
@@ -21,6 +22,7 @@ export class CTFdClient {
 
     public readonly challenges: ReturnType<typeof createChallenges>;
     public readonly scoreboard: ReturnType<typeof createScoreboard>;
+    public readonly users: ReturnType<typeof createUsers>;
 
     constructor(options: ClientOptions) {
         this.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
@@ -29,6 +31,7 @@ export class CTFdClient {
 
         this.challenges = createChallenges(this);
         this.scoreboard = createScoreboard(this);
+        this.users = createUsers(this);
     }
 
     public async callApi<T>(endpoint: string) {

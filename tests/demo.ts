@@ -23,4 +23,10 @@ import { CTFdClient } from '../src/client';
 
     const solves = await client.challenges.getSolves(chall.id);
     console.log(solves);
+
+    const user = await client.users.me.getMeUser();
+    console.log(user);
+
+    // This should be equivalent to the above
+    console.log(await client.users.getById(user.id));
 })()
