@@ -15,14 +15,14 @@ export interface User {
     // verified: boolean,
     language: string | null,
     // change_password: boolean,
-    team_id: number,
+    team_id: number | null,
     created: string, // ISO
 
     fields: [], // TODO
 }
 
 export interface Award {
-    description: null, // TODO
+    description: string | null,
     date: string,
     id: number,
     category: string,

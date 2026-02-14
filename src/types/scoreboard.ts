@@ -26,3 +26,20 @@ type ScoreboardTeamEntry = BaseScoreboardEntry & {
 }
 
 export type ScoreboardEntry = ScoreboardUserEntry | ScoreboardTeamEntry;
+
+export interface ScoreboardDetails {
+    id: number,
+    account_url: string,
+    name: string,
+    score: number,
+    bracket_id: null, // TODO
+    bracket_name: null,
+    solves: {
+        challenge_id: number,
+        account_id: number,
+        team_id: number | null,
+        user_id: number,
+        value: number,
+        date: string // ISO
+    }[]
+}
