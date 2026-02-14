@@ -8,10 +8,10 @@ import { CTFdClient } from '../src/client';
         password: 'password',
     });
 
-    const challs = await client.challenges.getChallenges();
+    const challs = await client.challenges.get();
     console.log(challs);
 
-    const scoreboard = await client.scoreboard.getScoreboard();
+    const scoreboard = await client.scoreboard.get();
     console.log(scoreboard.slice(0, 5));
 
     const chall = challs.find((c) => c.name === 'The Lost Park')!;
@@ -24,7 +24,7 @@ import { CTFdClient } from '../src/client';
     const solves = await client.challenges.getSolves(chall.id);
     console.log(solves);
 
-    const user = await client.users.me.getMeUser();
+    const user = await client.users.me.get();
     console.log(user);
 
     // This should be equivalent to the above

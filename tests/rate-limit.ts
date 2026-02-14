@@ -8,7 +8,7 @@ import { CTFdClient } from '../src/client';
         password: 'password',
     });
 
-    const chall = (await client.challenges.getChallenges()).find((c) => c.name === 'The Lost Park')!;
+    const chall = (await client.challenges.get()).find((c) => c.name === 'The Lost Park')!;
 
     const res = await client.challenges.submitFlag(chall.id, 'test');
     console.log(res);

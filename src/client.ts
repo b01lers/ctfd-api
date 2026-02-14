@@ -1,6 +1,6 @@
-import { createChallenges } from './endpoints/challenges';
-import { createScoreboard } from './endpoints/scoreboard';
-import { createUsers } from './endpoints/users';
+import { createChallengesMethods } from './endpoints/challenges';
+import { createScoreboardMethods } from './endpoints/scoreboard';
+import { createUsersMethods } from './endpoints/users';
 import { extractNonce } from './util';
 import type { APISuccess } from './types/api';
 
@@ -20,18 +20,18 @@ export class CTFdClient {
     private cachedNonce: string | null = null;
     private sessionExpiry = new Date();
 
-    public readonly challenges: ReturnType<typeof createChallenges>;
-    public readonly scoreboard: ReturnType<typeof createScoreboard>;
-    public readonly users: ReturnType<typeof createUsers>;
+    public readonly challenges: ReturnType<typeof createChallengesMethods>;
+    public readonly scoreboard: ReturnType<typeof createScoreboardMethods>;
+    public readonly users: ReturnType<typeof createUsersMethods>;
 
     constructor(options: ClientOptions) {
         this.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
         this.username = options.username;
         this.password = options.password;
 
-        this.challenges = createChallenges(this);
-        this.scoreboard = createScoreboard(this);
-        this.users = createUsers(this);
+        this.challenges = createChallengesMethods(this);
+        this.scoreboard = createScoreboardMethods(this);
+        this.users = createUsersMethods(this);
     }
 
     public async callApi<T>(endpoint: string) {

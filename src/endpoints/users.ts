@@ -20,7 +20,7 @@ interface UserSolve {
     type: "correct" // TODO?
 }
 
-export function createUsers(client: CTFdClient) {
+export function createUsersMethods(client: CTFdClient) {
     return {
         me: {
             /**
@@ -28,7 +28,7 @@ export function createUsers(client: CTFdClient) {
              * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_private}
              * @returns The logged-in user.
              */
-            async getMeUser() {
+            async get() {
                 return client.callApi<User>('/users/me');
             },
 

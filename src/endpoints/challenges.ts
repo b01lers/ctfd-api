@@ -20,7 +20,7 @@ export type FlagSubmissionResponse = APISuccess<{
     message: 'You\'re submitting flags too fast. Slow down.'
 }>
 
-export function createChallenges(client: CTFdClient) {
+export function createChallengesMethods(client: CTFdClient) {
     return {
         /**
          * Attempts to submit a flag for the given challenge.
@@ -46,7 +46,13 @@ export function createChallenges(client: CTFdClient) {
             return res.data;
         },
 
-        async getChallenges() {
+        /**
+         * Fetches the list of all challenges.
+         * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/challenges/operation/get_challenge_list}
+         *
+         * @returns The list of challenges, as a `Challenge[]`.
+         */
+        async get() {
             return client.callApi<Challenge[]>('/challenges');
         },
 
