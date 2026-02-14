@@ -2,7 +2,7 @@ import type { CTFdClient } from '../client';
 import type { Award, User } from '../types/users';
 
 
-interface UserSolve {
+export interface UserSolve {
     user: {
         name: string,
         id: number,

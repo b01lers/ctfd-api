@@ -288,4 +288,4 @@ declare class CTFdClient {
     }>;
 }
 
-export { type Award, CTFdClient, type Challenge, type ChallengeDetails, type ChallengeType, type ScoreboardEntry, type Solve, type User };
+export { type Award, CTFdClient, type Challenge, type ChallengeDetails, type ChallengeType, type ScoreboardEntry, type Solve, type User, type UserSolve };
