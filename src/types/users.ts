@@ -20,3 +20,17 @@ export interface User {
 
     fields: [], // TODO
 }
+
+export interface Award {
+    description: null, // TODO
+    date: string,
+    id: number,
+    category: string,
+    user_id: number,
+    team_id: null, // TODO
+    name: string,
+    user: number,
+    team: null, // TODO
+    value: number,
+    icon: string,
+}

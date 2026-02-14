@@ -1,5 +1,5 @@
 import type { CTFdClient } from '../client';
-import type { User } from '../types/users';
+import type { Award, User } from '../types/users';
 
 
 interface UserSolve {
@@ -34,12 +34,22 @@ export function createUsers(client: CTFdClient) {
 
             /**
              * Retrieves solves for the currently logged-in user.
-             * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_public_solves}
+             * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_private_solves}
              *
              * @returns The logged-in user's solves.
              */
             async getSolves() {
                 return client.callApi<UserSolve[]>('/users/me/solves');
+            },
+
+            /**
+             * Retrieves awards for the currently logged-in user.
+             * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_private_awards}
+             *
+             * @returns The logged-in user's awards.
+             */
+            async getAwards() {
+                return client.callApi<Award[]>('/users/me/awards');
             }
         },
 
@@ -63,6 +73,17 @@ export function createUsers(client: CTFdClient) {
          */
         async getSolves(id: number) {
             return client.callApi<UserSolve[]>(`/users/${id}/solves`);
+        },
+
+        /**
+         * Retrieves awards for a given user.
+         * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_public_awards}
+         *
+         * @param id The ID of the user to retrieve awards for.
+         * @returns The user's awards.
+         */
+        async getAwards(id: number) {
+            return client.callApi<Award[]>(`/users/${id}/awards`);
         }
     }
 }
