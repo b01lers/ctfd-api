@@ -2,7 +2,7 @@ type BaseScoreboardEntry = {
     pos: number,
     account_id: number,
     account_url: string,
-    oauth_id: null,
+    oauth_id: null, // TODO
     name: string,
     score: number,
     bracket_id: number | null,

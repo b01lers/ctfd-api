@@ -2,6 +2,24 @@ import type { CTFdClient } from '../client';
 import type { User } from '../types/users';
 
 
+interface UserSolve {
+    user: {
+        name: string,
+        id: number,
+    },
+    date: string, // ISO
+    challenge_id: number,
+    challenge: {
+        value: number,
+        name: string,
+        id: number,
+        category: string,
+    },
+    team: number | null,
+    id: number,
+    type: "correct" // TODO?
+}
+
 export function createUsers(client: CTFdClient) {
     return {
         me: {
@@ -11,7 +29,17 @@ export function createUsers(client: CTFdClient) {
              * @returns The logged-in user.
              */
             async getMeUser() {
-                return client.callApi<User>(`/users/me`);
+                return client.callApi<User>('/users/me');
+            },
+
+            /**
+             * Retrieves solves for the currently logged-in user.
+             * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_public_solves}
+             *
+             * @returns The logged-in user's solves.
+             */
+            async getSolves() {
+                return client.callApi<UserSolve[]>('/users/me/solves');
             }
         },
 
@@ -24,6 +52,17 @@ export function createUsers(client: CTFdClient) {
          */
         async getById(id: number) {
             return client.callApi<User>(`/users/${id}`);
+        },
+
+        /**
+         * Retrieves solves for a given user.
+         * Ref: {@Link https://docs.ctfd.io/docs/api/redoc#tag/users/operation/get_user_public_solves}
+         *
+         * @param id The ID of the user to retrieve solves for.
+         * @returns The user's solves.
+         */
+        async getSolves(id: number) {
+            return client.callApi<UserSolve[]>(`/users/${id}/solves`);
         }
     }
 }

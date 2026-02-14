@@ -3,7 +3,7 @@ export interface User {
     oauth_id: number | null,
     name: string,
     // password: string,
-    email: string,
+    email?: string,
     // type: string,
     // secret: string,
     website: string | null,
