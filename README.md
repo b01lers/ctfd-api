@@ -42,16 +42,30 @@ const client = new CTFdClient({
 });
 
 // Fetch challenges list
-const challs = await client.getChallenges();
+const challs = await client.challenges.get();
 
 // Fetch scoreboard data
-const scoreboard = await client.getScoreboard();
+const scoreboard = await client.scoreboard.get();
 console.log(scoreboard.slice(0, 5));
 
 // Get details about a challenge, and submit a flag
 const chall = challs.find((c) => c.name === 'The Lost Park')!;
-const details = await client.getChallengeDetails(chall.id);
+const details = await client.challenges.getDetails(chall.id);
 console.log(details.description);
 
-await client.submitFlag(chall.id, 'ctfd{test_flag}');
+await client.challenges.submitFlag(chall.id, 'Major Mark Park');
+
+const solves = await client.challenges.getSolves(chall.id);
+console.log(solves);
+
+// Fetch information about a user
+const user = await client.users.me.get();
+const userSolves = await client.users.me.getSolves();
+const awards = await client.users.me.getAwards();
+console.log(user);
+
+// This should be equivalent to the above
+console.log(await client.users.getById(user.id));
+console.log(await client.users.getSolves(user.id));
+console.log(await client.users.getAwards(user.id));
 ```
